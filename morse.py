@@ -1,32 +1,32 @@
-def morse(letter):
-    
-     switcher = {
-       "a" and "A": ".-",
-       "b" and "B": "-...",
-       "c" and "C": "-.-.",
-       "d" and "D": "-..",
-       "e" and "E": ".",
-       "f" and "F": "..-.",
-       "g" and "G": "--.",
-       "h" and "H": "....",
-       "i" and "I": "..",
-       "j" and "J": ".---",
-       "k" and "K": "-.-",  
-       "l" and "L": ".-..",
-       "m" and "M": "--",
-       "n" and "N": "-.",
-       "o" and "O": "---",
-       "p" and "P": ".--.",
-       "q" and "Q": "--.-",
-       "r" and "R": ".-.",
-       "s" and "S": "...",
-       "t" and "T": "-",
-       "u" and "U": "..-",
-       "v" and "V": "...-",
-       "w" and "W": ".--",
-       "x" and "X": "-..-",
-       "y" and "Y": "-.--",
-       "z" and "Z": "--..",
+import winsound
+choice = input("press d to decrypt the morse code, c to create one\n")
+morsedict = {
+       "a" : ".-",
+       "b" : "-...",
+       "c" : "-.-.",
+       "d" : "-..",
+       "e" : ".",
+       "f" : "..-.",
+       "g" : "--.",
+       "h" : "....",
+       "i" : "..",
+       "j" : ".---",
+       "k" : "-.-",  
+       "l" : ".-..",
+       "m" : "--",
+       "n" : "-.",
+       "o" : "---",
+       "p" : ".--.",
+       "q" : "--.-",
+       "r" : ".-.",
+       "s" : "...",
+       "t" : "-",
+       "u" : "..-",
+       "v" : "...-",
+       "w" : ".--",
+       "x" : "-..-",
+       "y" : "-.--",
+       "z" : "--..",
        "1": ".----",
        "2": "..---",
        "3": "...--",
@@ -38,19 +38,28 @@ def morse(letter):
        "9": "----.",
        "0": "-----",
        " ": "/"
-        }
-     return switcher.get(letter, " ")
+    }
 
-import winsound
-text = input()
-for i in text:
-    for j in morse(i):
-        if (j == "."):
-            print(j, end="")
-            winsound.Beep(2000,150)
-        if (j == "-"):
-            print(j, end="")
-            winsound.Beep(2000,450)  
-        if (j == "/"):
-            print(j, end="")
-    print(" ", end="")
+inv_morsedict = {v: k for k, v in morsedict.items()}
+def morse(m):
+    m = m.split()
+    for i in m:
+        print(inv_morsedict[i], end = "")
+def text(t):
+    t = t.lower()
+    t = list(t)
+    for i in t:
+        print(morsedict[i], end = " ")
+        for j in morsedict[i]:
+            if (j == "."):
+                winsound.Beep(2000,150)
+            if (j == "-"):
+                winsound.Beep(2000,450)  
+                
+        
+if (choice == 'D' or choice == 'd'):
+    morse(input())
+elif (choice == 'C' or choice == 'c'):
+    text(input())
+else:
+    print("WRONG DECISION, TRY AGAIN\n")
